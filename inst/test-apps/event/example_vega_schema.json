@@ -1,0 +1,64 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.json",
+  "width": 200,
+  "height": 200,
+  "padding": 5,
+
+  "signals": [
+    {
+      "name": "textwithcolon",
+      "value": "... will be from shiny:inputchanged ...",
+      "on": [
+        {
+          "events": {
+            "source": "window",
+            "type": "shiny:inputchanged"
+          },
+          "update": "event.value",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "textwithunderscore",
+      "value": "... will be from shiny_inputchanged ...",
+      "on": [
+        {
+          "events": {
+            "source": "window",
+            "type": "shiny_inputchanged"
+          },
+          "update": "event.detail.value",
+          "force":  true
+        }
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "y": {"value": 0}
+        },
+        "update": {
+        	"text": {"signal": "textwithunderscore"}
+    		}
+    	}
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "y": {"value": 20}
+        },
+        "update": {
+        	"text": {"signal": "textwithcolon"}
+    		}
+    	}
+    }
+  ]
+}
