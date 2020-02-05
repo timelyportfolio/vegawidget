@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v3.json",
   "width": 200,
-  "height": 200,
+  "height": 100,
   "padding": 5,
 
   "signals": [
     {
-      "name": "textwithcolon",
-      "value": "... will be from shiny:inputchanged ...",
+      "name": "textshinyjquery",
+      "value": "... jquery shiny:inputchanged ...",
       "on": [
         {
           "events": {
@@ -20,26 +20,37 @@
       ]
     },
     {
-      "name": "textwithunderscore",
-      "value": "... will be from shiny_inputchanged ...",
+      "name": "textshinynative",
+      "value": "... shinynative:inputchanged ...",
       "on": [
         {
           "events": {
             "source": "window",
-            "type": "shiny_inputchanged"
+            "type": "shinynative:inputchanged"
           },
           "update": "event.detail.value",
           "force":  true
         }
       ]
     },
-  {
-      "name": "textwithdomevent",
-      "value": "... will be from dom event ...",
+    {
+      "name": "textion",
+      "value": "... ion slider jquery event ...",
       "on": [
         {
           "events": "#slider:change",
           "update": "event.target",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "textdomslider",
+      "value": "... dom slider event ...",
+      "on": [
+        {
+          "events": "#domslider:change",
+          "update": "event.target.value",
           "force":  true
         }
       ]
@@ -55,7 +66,7 @@
           "y": {"value": 0}
         },
         "update": {
-        	"text": {"signal": "textwithunderscore"}
+        	"text": {"signal": "textshinyjquery"}
     		}
     	}
     },
@@ -67,7 +78,7 @@
           "y": {"value": 20}
         },
         "update": {
-        	"text": {"signal": "textwithcolon"}
+        	"text": {"signal": "textshinynative"}
     		}
     	}
     },
@@ -79,7 +90,19 @@
           "y": {"value": 40}
         },
         "update": {
-        	"text": {"signal": "textwithdomevent"}
+        	"text": {"signal": "textion"}
+    		}
+    	}
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "y": {"value": 60}
+        },
+        "update": {
+        	"text": {"signal": "textdomslider"}
     		}
     	}
     }
